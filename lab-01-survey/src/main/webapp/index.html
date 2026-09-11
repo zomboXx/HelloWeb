@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Murach Survey</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="survey-page">
+        <img class="logo" src="murach-logo.png" alt="Murach logo">
+
+        <h1>Survey</h1>
+        <p>If you have a moment, we'd appreciate it if you would fill out this survey.</p>
+
+        <p id="success-message" class="message" hidden>
+            Thank you. Your response has been submitted.
+        </p>
+
+        <form method="post" action="hello">
+            <section>
+                <h2>Your information:</h2>
+
+                <div class="form-row">
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" name="firstName" type="text" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" name="lastName" type="text" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="birthDate">Date of Birth</label>
+                    <input id="birthDate" name="birthDate" type="date">
+                </div>
+            </section>
+
+            <section>
+                <h2>How did you hear about us?</h2>
+                <div class="inline-options">
+                    <label><input type="radio" name="source" value="Search engine" checked> Search engine</label>
+                    <label><input type="radio" name="source" value="Word of mouth"> Word of mouth</label>
+                    <label><input type="radio" name="source" value="Social Media"> Social Media</label>
+                    <label><input type="radio" name="source" value="Other"> Other</label>
+                </div>
+            </section>
+
+            <section>
+                <h2>Would you like to receive announcements<br>about new CDs and special offers?</h2>
+                <label class="check-option">
+                    <input type="checkbox" name="offers" value="yes"> YES, I'd like that.
+                </label>
+                <label class="check-option">
+                    <input type="checkbox" name="emailOffers" value="yes"> YES, please send me email announcements.
+                </label>
+            </section>
+
+            <p>
+                <label for="contact">Please contact me by:</label>
+                <select id="contact" name="contact">
+                    <option>Email or postal mail</option>
+                    <option>Email</option>
+                    <option>Postal mail</option>
+                </select>
+            </p>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+
+    <script>
+        const submitted = new URLSearchParams(window.location.search).get("submitted");
+        document.getElementById("success-message").hidden = submitted !== "true";
+    </script>
+</body>
+</html>

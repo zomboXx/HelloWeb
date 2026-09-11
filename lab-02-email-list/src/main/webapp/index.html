@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Join Our Email List</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="email-list-page">
+        <h1>Join our email list</h1>
+        <p>To join our email list, enter your name and email address below.</p>
+
+        <p id="success-message" class="message" hidden>
+            Thanks for joining our email list.
+        </p>
+
+        <form method="post" action="join">
+            <div class="form-row">
+                <label for="email">Email:</label>
+                <input id="email" name="email" type="email" required>
+            </div>
+
+            <div class="form-row">
+                <label for="firstName">First Name:</label>
+                <input id="firstName" name="firstName" type="text" required>
+            </div>
+
+            <div class="form-row">
+                <label for="lastName">Last Name:</label>
+                <input id="lastName" name="lastName" type="text" required>
+            </div>
+
+            <button type="submit">Join Now</button>
+        </form>
+    </main>
+
+    <script>
+        const joined = new URLSearchParams(window.location.search).get("joined");
+        document.getElementById("success-message").hidden = joined !== "true";
+    </script>
+</body>
+</html>
