@@ -2,6 +2,8 @@
 
 Ứng dụng mô phỏng giỏ hàng CD trong Chapter 7 của *Murach's Java Servlets and JSP*. Mỗi trình duyệt có một giỏ hàng riêng được lưu trong `HttpSession`.
 
+Demo: [https://helloweb-1.onrender.com/cart?action=list](https://helloweb-1.onrender.com/cart?action=list)
+
 ## Chức năng
 
 - Hiển thị danh sách CD.
