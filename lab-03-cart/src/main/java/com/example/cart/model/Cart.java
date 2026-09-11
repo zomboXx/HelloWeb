@@ -15,7 +15,7 @@ public class Cart implements Serializable {
 
     private final Map<String, CartItem> items = new LinkedHashMap<>();
 
-    public void add(Product product) {
+    public synchronized void add(Product product) {
         CartItem existingItem = items.get(product.getCode());
         if (existingItem == null) {
             items.put(product.getCode(), new CartItem(product, 1));
@@ -24,32 +24,32 @@ public class Cart implements Serializable {
         }
     }
 
-    public void update(String productCode, int quantity) {
+    public synchronized void update(String productCode, int quantity) {
         CartItem item = items.get(productCode);
         if (item != null) {
             item.setQuantity(quantity);
         }
     }
 
-    public void remove(String productCode) {
+    public synchronized void remove(String productCode) {
         items.remove(productCode);
     }
 
-    public List<CartItem> getItems() {
+    public synchronized List<CartItem> getItems() {
         return new ArrayList<>(items.values());
     }
 
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return items.isEmpty();
     }
 
-    public int getItemCount() {
+    public synchronized int getItemCount() {
         return items.values().stream()
                 .mapToInt(CartItem::getQuantity)
                 .sum();
     }
 
-    public BigDecimal getTotal() {
+    public synchronized BigDecimal getTotal() {
         return items.values().stream()
                 .map(CartItem::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
