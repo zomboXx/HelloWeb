@@ -1,0 +1,359 @@
+:root {
+    color-scheme: light;
+    --ink: #14213d;
+    --muted: #5c677d;
+    --paper: #ffffff;
+    --canvas: #f4f1ea;
+    --accent: #b20d30;
+    --accent-dark: #7d0922;
+    --teal: #087e8b;
+    --line: #ded8ca;
+    --shadow: 0 18px 50px rgba(20, 33, 61, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ink);
+    background:
+            radial-gradient(circle at 10% 10%, rgba(8, 126, 139, 0.12), transparent 28rem),
+            linear-gradient(135deg, #f8f5ef, var(--canvas));
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+a {
+    color: var(--teal);
+}
+
+.page-shell {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 64px 0;
+}
+
+.narrow-shell {
+    width: min(780px, calc(100% - 32px));
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 36px;
+}
+
+.brand-mark {
+    display: grid;
+    flex: 0 0 92px;
+    width: 92px;
+    height: 92px;
+    place-items: center;
+    color: white;
+    background: var(--accent);
+    border-radius: 22px 6px 22px 6px;
+    box-shadow: 10px 10px 0 rgba(178, 13, 48, 0.14);
+    font: 700 3.2rem Georgia, serif;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 10px;
+    font: 700 clamp(2.2rem, 5vw, 4rem)/1.05 Georgia, "Times New Roman", serif;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font: 700 1.45rem/1.2 Georgia, "Times New Roman", serif;
+}
+
+.eyebrow {
+    margin-bottom: 8px;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.lead {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 1.06rem;
+    line-height: 1.65;
+}
+
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.album-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 22px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(222, 216, 202, 0.9);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.album-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 60px rgba(20, 33, 61, 0.16);
+}
+
+.album-art {
+    display: grid;
+    flex: 0 0 132px;
+    width: 132px;
+    aspect-ratio: 1;
+    place-items: end start;
+    padding: 14px;
+    overflow: hidden;
+    color: white;
+    background:
+            linear-gradient(145deg, transparent 45%, rgba(255, 255, 255, 0.15) 46% 51%, transparent 52%),
+            linear-gradient(145deg, var(--accent), var(--accent-dark));
+    border-radius: 14px;
+    box-shadow: 0 14px 24px rgba(125, 9, 34, 0.22);
+}
+
+.album-art span {
+    font: 700 1rem Georgia, serif;
+    letter-spacing: 0.08em;
+}
+
+.album-art.small {
+    flex-basis: 105px;
+    width: 105px;
+}
+
+.album-details {
+    min-width: 0;
+}
+
+.album-details > p:not(.artist) {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.artist {
+    margin-bottom: 5px;
+    color: var(--teal);
+    font-weight: 800;
+}
+
+.button,
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 17px;
+    color: white;
+    background: var(--accent);
+    border: 0;
+    border-radius: 10px;
+    font: inherit;
+    font-weight: 750;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover,
+button:hover {
+    background: var(--accent-dark);
+}
+
+.account-bar {
+    margin-top: 28px;
+    padding: 16px 20px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.panel {
+    padding: clamp(24px, 6vw, 52px);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+.registration-form {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: 16px 18px;
+    align-items: center;
+    margin-top: 28px;
+}
+
+.registration-form label {
+    font-weight: 750;
+}
+
+.registration-form input {
+    width: 100%;
+    min-height: 44px;
+    padding: 9px 12px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid #aeb5c2;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.registration-form input:focus {
+    border-color: var(--teal);
+    outline: 3px solid rgba(8, 126, 139, 0.15);
+}
+
+.registration-form button {
+    grid-column: 2;
+    justify-self: start;
+}
+
+.error-message {
+    margin-top: 22px;
+    padding: 12px 14px;
+    color: #7d0922;
+    background: #fff0f3;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+}
+
+.privacy-note {
+    margin: 22px 0 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.download-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+}
+
+.welcome-message {
+    margin: 28px 0 18px;
+    color: var(--muted);
+}
+
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+}
+
+th {
+    color: var(--muted);
+    background: #f7f5f0;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.format-badge {
+    display: inline-block;
+    padding: 5px 9px;
+    color: #07545d;
+    background: #dff5f4;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.actions {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.text-button {
+    font-weight: 700;
+}
+
+@media (max-width: 760px) {
+    .page-shell {
+        padding: 36px 0;
+    }
+
+    .album-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site-header {
+        align-items: flex-start;
+    }
+
+    .brand-mark {
+        flex-basis: 68px;
+        width: 68px;
+        height: 68px;
+        font-size: 2.3rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .album-card,
+    .download-heading {
+        align-items: flex-start;
+    }
+
+    .album-art {
+        flex-basis: 88px;
+        width: 88px;
+    }
+
+    .registration-form {
+        grid-template-columns: 1fr;
+    }
+
+    .registration-form button {
+        grid-column: 1;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
