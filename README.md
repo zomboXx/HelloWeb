@@ -9,7 +9,7 @@ Repository này tổng hợp các bài thực hành môn Lập trình Web. Mỗi
 | 1 | Murach Survey | [lab-01-survey](./lab-01-survey) | [Mở website](https://wepr-7m86.onrender.com/) |
 | 2 | Join Our Email List | [lab-02-email-list](./lab-02-email-list) | [Mở website](https://helloweb-dfjj.onrender.com/) |
 | 3 | Shopping Cart với `HttpSession` | [lab-03-cart](./lab-03-cart) | [Mở website](https://helloweb-1.onrender.com/cart?action=list) |
-| 4 | Album Download với session và cookie | [lab-04-album-download](./lab-04-album-download) | Chưa triển khai |
+| 4 | Album Download với session và cookie | [lab-04-album-download](./lab-04-album-download) | [Mở website](https://helloweb-2.onrender.com/) |
 
 ## Build từng bài
 
