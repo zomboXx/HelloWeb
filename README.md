@@ -10,7 +10,7 @@ Repository này tổng hợp các bài thực hành môn Lập trình Web. Mỗi
 | 2 | Join Our Email List | [lab-02-email-list](./lab-02-email-list) | [Mở website](https://helloweb-dfjj.onrender.com/) |
 | 3 | Shopping Cart với `HttpSession` | [lab-03-cart](./lab-03-cart) | [Mở website](https://helloweb-1.onrender.com/cart?action=list) |
 | 4 | Album Download với session và cookie | [lab-04-album-download](./lab-04-album-download) | [Mở website](https://helloweb-2.onrender.com/) |
-| 5 | JDBC, MVC và HikariCP (SQL Gateway + Email List) | [lab-05-jdbc](./lab-05-jdbc) | Chạy local; chưa public SQL Gateway |
+| 5 | JDBC, MVC và HikariCP (SQL Gateway + Email List) | [lab-05-jdbc](./lab-05-jdbc) | SQL Gateway chỉ chạy trên localhost |
 
 ## Build từng bài
 

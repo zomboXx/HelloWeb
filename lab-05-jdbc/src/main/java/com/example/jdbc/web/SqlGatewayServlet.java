@@ -26,6 +26,10 @@ public class SqlGatewayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (!isLocal(request)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "SQL Gateway is available on localhost only.");
+            return;
+        }
         request.setAttribute("sql", "SELECT * FROM User");
         show(request, response);
     }
@@ -33,6 +37,10 @@ public class SqlGatewayServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (!isLocal(request)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "SQL Gateway is available on localhost only.");
+            return;
+        }
         request.setCharacterEncoding("UTF-8");
         String sql = request.getParameter("sql");
         sql = sql == null ? "" : sql.trim();
@@ -62,5 +70,11 @@ public class SqlGatewayServlet extends HttpServlet {
     private static void show(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/views/sql-gateway.jsp").forward(request, response);
+    }
+
+    private static boolean isLocal(HttpServletRequest request) {
+        String address = request.getRemoteAddr();
+        return "127.0.0.1".equals(address) || "::1".equals(address)
+                || "0:0:0:0:0:0:0:1".equals(address);
     }
 }

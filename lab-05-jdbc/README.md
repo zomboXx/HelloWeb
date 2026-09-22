@@ -36,7 +36,7 @@ VALUES ('mike@murach.com', 'Mike', 'Murach')
 
 Run `SELECT * FROM User` again to see Mike. In Email List, submit `jsmith@gmail.com` to see the duplicate-email message.
 
-Do **not** attach this SQL Gateway to a real database or publish it as an unrestricted public service. Allowing visitors to submit SQL is intentionally a classroom exercise, not a production pattern. The gateway accepts only one SELECT/INSERT/UPDATE/DELETE statement, but that is not a complete SQL security boundary.
+Do **not** attach this SQL Gateway to a real database or publish it as an unrestricted public service. Allowing visitors to submit SQL is intentionally a classroom exercise, not a production pattern. The servlet accepts SQL Gateway requests from localhost only and returns HTTP 403 for remote clients. If you deploy the Docker image, the Email List remains available, but the SQL Gateway is intentionally unavailable from the public URL. Its one-statement check is not a complete SQL security boundary.
 
 ## Questions to be ready for
 
