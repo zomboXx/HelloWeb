@@ -1,0 +1,30 @@
+:root { font-family: Arial, Helvetica, sans-serif; color: #171717; background: #fff; }
+* { box-sizing: border-box; }
+body { margin: 0; font-size: 18px; }
+.page { max-width: 1050px; margin: 0; padding: 18px 20px 48px; }
+h1 { color: #087277; font-size: 2rem; margin: 0 0 22px; }
+h2 { font-size: 1.2rem; margin: 24px 0 14px; }
+p { margin: 0 0 20px; }
+a { color: #006a70; }
+.back { font-size: .82rem; margin-bottom: 18px; }
+.exercise-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.exercise-links a { display: inline-block; padding: 10px 14px; border: 1px solid #087277; border-radius: 4px; text-decoration: none; }
+.exercise-links a:hover { background: #edf7f7; }
+.note { color: #555; font-size: .85rem; margin-top: 24px; }
+.error { color: #a12121; font-style: italic; max-width: 510px; }
+.form-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.form-row label { width: 112px; flex: 0 0 112px; }
+.form-row input { width: 270px; max-width: calc(100vw - 180px); height: 28px; font: inherit; font-size: 16px; padding: 2px 5px; }
+.form-actions { margin-left: 124px; }
+button { font: inherit; font-size: 16px; padding: 3px 10px; cursor: pointer; }
+.gateway { max-width: 1100px; }
+.block-label { display: block; font-weight: 700; margin-bottom: 12px; }
+textarea { display: block; width: min(100%, 750px); min-height: 180px; padding: 8px; margin-bottom: 10px; font: 16px Consolas, monospace; }
+table { border-collapse: collapse; width: min(100%, 920px); font-size: 16px; }
+th, td { border: 1px solid #333; padding: 8px; text-align: left; overflow-wrap: anywhere; }
+@media (max-width: 500px) {
+    .form-row { display: block; }
+    .form-row label { display: block; width: auto; margin-bottom: 3px; }
+    .form-row input { max-width: 100%; }
+    .form-actions { margin-left: 0; }
+}
