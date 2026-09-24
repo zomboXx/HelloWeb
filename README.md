@@ -11,6 +11,7 @@ Repository này tổng hợp các bài thực hành môn Lập trình Web. Mỗi
 | 3 | Shopping Cart với `HttpSession` | [lab-03-cart](./lab-03-cart) | [Mở website](https://helloweb-1.onrender.com/cart?action=list) |
 | 4 | Album Download với session và cookie | [lab-04-album-download](./lab-04-album-download) | [Mở website](https://helloweb-2.onrender.com/) |
 | 5 | JDBC, MVC và HikariCP (SQL Gateway + Email List) | [lab-05-jdbc](./lab-05-jdbc) | SQL Gateway chỉ chạy trên localhost |
+| 6 | Email List với JPA, Hibernate và HikariCP | [lab-06-jpa](./lab-06-jpa) | Chạy local; chưa triển khai |
 
 ## Build từng bài
 
@@ -29,6 +30,7 @@ mvn -f .\lab-02-email-list\pom.xml clean package
 mvn -f .\lab-03-cart\pom.xml clean package
 mvn -f .\lab-04-album-download\pom.xml clean package
 mvn -f .\lab-05-jdbc\pom.xml clean package
+mvn -f .\lab-06-jpa\pom.xml clean package
 ```
 
 File WAR sau khi build nằm trong thư mục `target` của từng bài.
