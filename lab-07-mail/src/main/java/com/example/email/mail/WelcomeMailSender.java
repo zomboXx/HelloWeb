@@ -6,5 +6,5 @@ import jakarta.mail.MessagingException;
 public interface WelcomeMailSender {
     boolean isConfigured();
 
-    void sendWelcome(User user) throws MessagingException;
+    MailDelivery sendWelcome(User user) throws MessagingException;
 }

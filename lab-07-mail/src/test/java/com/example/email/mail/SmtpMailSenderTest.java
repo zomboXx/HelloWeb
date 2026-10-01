@@ -30,7 +30,8 @@ class SmtpMailSenderTest {
     void sendsAuthenticatedUtf8WelcomeMessage() throws Exception {
         SmtpConfig config = new SmtpConfig("127.0.0.1", server.getSmtp().getPort(), "none",
                 "smtp-user", "test-password", "welcome@example.test");
-        new SmtpMailSender(config).sendWelcome(new User("student@example.test", "Đức", "Phát"));
+        MailDelivery delivery = new SmtpMailSender(config).sendWelcome(new User("student@example.test", "Đức", "Phát"));
+        assertEquals(MailDelivery.Transport.SMTP, delivery.transport());
 
         assertTrue(server.waitForIncomingEmail(3000, 1));
         MimeMessage message = server.getReceivedMessages()[0];
@@ -55,8 +56,31 @@ class SmtpMailSenderTest {
     void doesNotDowngradeRequiredTlsToPlainText() {
         SmtpConfig config = new SmtpConfig("127.0.0.1", server.getSmtp().getPort(), "starttls",
                 "", "", "welcome@example.test");
-        assertThrows(MessagingException.class,
+        assertThrows(SmtpUnavailableException.class,
                 () -> new SmtpMailSender(config).sendWelcome(new User("student@example.test", "John", "Smith")));
+        assertEquals(0, server.getReceivedMessages().length);
+    }
+
+    @Test
+    void authenticationFailureBeforeSendingCanUseApiFallback() throws Exception {
+        SmtpConfig config = new SmtpConfig("127.0.0.1", server.getSmtp().getPort(), "none",
+                "smtp-user", "wrong-password", "welcome@example.test");
+        java.util.concurrent.atomic.AtomicInteger calls = new java.util.concurrent.atomic.AtomicInteger();
+        WelcomeMailSender api = new WelcomeMailSender() {
+            @Override
+            public boolean isConfigured() { return true; }
+
+            @Override
+            public MailDelivery sendWelcome(User user) {
+                calls.incrementAndGet();
+                return new MailDelivery(MailDelivery.Transport.EMAIL_API, "Brevo",
+                        MailDelivery.FallbackReason.NONE);
+            }
+        };
+        MailDelivery result = new SmtpFirstMailSender(new SmtpMailSender(config), api, true)
+                .sendWelcome(new User("student@example.test", "John", "Smith"));
+        assertEquals(MailDelivery.FallbackReason.SMTP_UNAVAILABLE, result.fallbackReason());
+        assertEquals(1, calls.get());
         assertEquals(0, server.getReceivedMessages().length);
     }
 }

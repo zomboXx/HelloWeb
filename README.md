@@ -12,7 +12,7 @@ Repository này tổng hợp các bài thực hành môn Lập trình Web. Mỗi
 | 4 | Album Download với session và cookie | [lab-04-album-download](./lab-04-album-download) | [Mở website](https://helloweb-2.onrender.com/) |
 | 5 | JDBC, MVC và HikariCP (SQL Gateway + Email List) | [lab-05-jdbc](./lab-05-jdbc) | SQL Gateway chỉ chạy trên localhost |
 | 6 | Email List với JPA, Hibernate và HikariCP | [lab-06-jpa](./lab-06-jpa) | Chạy local; chưa triển khai |
-| 7 | Email List gửi thư chào mừng bằng Jakarta Mail (chương 14) | [lab-07-mail](./lab-07-mail) | Chạy local; cần cấu hình SMTP để gửi thư |
+| 7 | Email List: Jakarta Mail/SMTP, thêm fallback HTTPS API | [lab-07-mail](./lab-07-mail) | [Mở website](https://helloweb-4.onrender.com/); cần cấu hình dịch vụ gửi thư và redeploy code mới |
 
 ## Build từng bài
 

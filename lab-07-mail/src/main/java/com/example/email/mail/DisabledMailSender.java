@@ -9,7 +9,7 @@ public class DisabledMailSender implements WelcomeMailSender {
     }
 
     @Override
-    public void sendWelcome(User user) {
-        throw new IllegalStateException("SMTP is not configured.");
+    public MailDelivery sendWelcome(User user) {
+        throw new IllegalStateException("Email sending is not configured.");
     }
 }

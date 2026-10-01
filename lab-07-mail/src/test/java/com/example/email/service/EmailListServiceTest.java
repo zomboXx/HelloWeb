@@ -3,6 +3,8 @@ package com.example.email.service;
 import com.example.email.data.UserRepository;
 import com.example.email.mail.DisabledMailSender;
 import com.example.email.mail.WelcomeMailSender;
+import com.example.email.mail.MailDelivery;
+import com.example.email.mail.MailDeliveryUncertainException;
 import com.example.email.model.User;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityManager;
@@ -80,6 +82,38 @@ class EmailListServiceTest {
         assertTrue(users.findByEmail(user().getEmail()).isPresent());
     }
 
+    @Test
+    void apiAcceptanceIsRecordedAndDuplicateDoesNotResend() {
+        CountingMailSender mail = new CountingMailSender(false) {
+            @Override
+            public MailDelivery sendWelcome(User user) throws MessagingException {
+                super.sendWelcome(user); // Also checks the JPA commit happened first.
+                return new MailDelivery(MailDelivery.Transport.EMAIL_API, "Brevo",
+                        MailDelivery.FallbackReason.SMTP_UNAVAILABLE);
+            }
+        };
+        EmailListService service = new EmailListService(users, mail);
+        RegistrationResult result = service.register(user());
+        assertEquals(ACCEPTED_BY_API, result.status());
+        assertEquals("Brevo", result.delivery().provider());
+        assertEquals(MailDelivery.FallbackReason.SMTP_UNAVAILABLE, result.delivery().fallbackReason());
+        assertEquals(DUPLICATE, service.register(user()).status());
+        assertEquals(1, mail.calls);
+    }
+
+    @Test
+    void uncertainAcceptanceKeepsRegistrationAndDoesNotClaimSent() {
+        WelcomeMailSender mail = new CountingMailSender(false) {
+            @Override
+            public MailDelivery sendWelcome(User user) throws MessagingException {
+                super.sendWelcome(user);
+                throw new MailDeliveryUncertainException();
+            }
+        };
+        assertEquals(UNCONFIRMED, new EmailListService(users, mail).register(user()).status());
+        assertTrue(users.findByEmail(user().getEmail()).isPresent());
+    }
+
     private User user() {
         return new User("student@example.test", "John", "Smith");
     }
@@ -98,12 +132,13 @@ class EmailListServiceTest {
         }
 
         @Override
-        public void sendWelcome(User user) throws MessagingException {
+        public MailDelivery sendWelcome(User user) throws MessagingException {
             calls++;
             assertTrue(users.findByEmail(user.getEmail()).isPresent());
             if (fail) {
                 throw new MessagingException("Simulated SMTP failure");
             }
+            return MailDelivery.smtp();
         }
     }
 }

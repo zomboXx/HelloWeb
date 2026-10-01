@@ -10,8 +10,10 @@ import jakarta.mail.internet.MimeMessage;
 
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class SmtpMailSender implements WelcomeMailSender {
+    private static final Logger LOGGER = Logger.getLogger(SmtpMailSender.class.getName());
     private final SmtpConfig config;
     private final Session session;
 
@@ -39,25 +41,39 @@ public class SmtpMailSender implements WelcomeMailSender {
     }
 
     @Override
-    public void sendWelcome(User user) throws MessagingException {
+    public MailDelivery sendWelcome(User user) throws MessagingException {
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(config.from(), true));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail(), true));
-        message.setSubject("Welcome to our email list", "UTF-8");
-        message.setText("Dear " + user.getFirstName() + ",\n\n"
-                + "Thanks for joining our email list. We'll make sure to send you "
-                + "announcements about new products and promotions.\n"
-                + "Have a great day and thanks again!\n\n"
-                + "Kelly Slivkoff\nMike Murach & Associates", "UTF-8");
+        message.setSubject(WelcomeMessage.SUBJECT, "UTF-8");
+        message.setText(WelcomeMessage.text(user), "UTF-8");
         message.setSentDate(new Date());
         message.saveChanges();
-        try (Transport transport = session.getTransport("smtp")) {
-            if (config.authenticationRequired()) {
-                transport.connect(config.host(), config.port(), config.username(), config.password());
-            } else {
-                transport.connect(config.host(), config.port(), null, null);
+        Transport transport = session.getTransport("smtp");
+        try {
+            try {
+                if (config.authenticationRequired()) {
+                    transport.connect(config.host(), config.port(), config.username(), config.password());
+                } else {
+                    transport.connect(config.host(), config.port(), null, null);
+                }
+            } catch (MessagingException e) {
+                throw new SmtpUnavailableException(e);
             }
-            transport.sendMessage(message, message.getAllRecipients());
+            try {
+                transport.sendMessage(message, message.getAllRecipients());
+            } catch (MessagingException e) {
+                // The server might already have accepted DATA before the connection broke.
+                throw new MailDeliveryUncertainException();
+            }
+            return MailDelivery.smtp();
+        } finally {
+            try {
+                transport.close();
+            } catch (MessagingException e) {
+                // A QUIT/close failure must not change a confirmed send into a retry.
+                LOGGER.warning("SMTP connection cleanup failed; no resend was attempted.");
+            }
         }
     }
 }

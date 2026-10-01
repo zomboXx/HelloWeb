@@ -2,10 +2,8 @@ package com.example.email.web;
 
 import com.example.email.data.JpaLifecycle;
 import com.example.email.data.UserRepository;
-import com.example.email.mail.DisabledMailSender;
-import com.example.email.mail.SmtpConfig;
-import com.example.email.mail.SmtpMailSender;
-import com.example.email.mail.WelcomeMailSender;
+import com.example.email.mail.MailSenders;
+import com.example.email.mail.SmtpFirstMailSender;
 import com.example.email.model.User;
 import com.example.email.service.EmailListService;
 import com.example.email.service.RegistrationResult;
@@ -24,17 +22,16 @@ public class EmailListServlet extends HttpServlet {
     private static final Pattern EMAIL = Pattern.compile("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
     private static final String FLASH_KEY = "registrationResult";
     private EmailListService service;
-    private boolean mailConfigured;
+    private String mailPolicy;
 
     @Override
     public void init() throws ServletException {
         try {
-            WelcomeMailSender mail = SmtpConfig.fromEnvironment(System.getenv())
-                    .<WelcomeMailSender>map(SmtpMailSender::new).orElseGet(DisabledMailSender::new);
-            mailConfigured = mail.isConfigured();
+            SmtpFirstMailSender mail = MailSenders.fromEnvironment(System.getenv());
+            mailPolicy = mail.policyNotice();
             service = new EmailListService(new UserRepository(JpaLifecycle.from(getServletContext())), mail);
         } catch (IllegalArgumentException e) {
-            throw new ServletException("Invalid SMTP configuration: " + e.getMessage(), e);
+            throw new ServletException("Invalid email configuration: " + e.getMessage(), e);
         }
     }
 
@@ -48,6 +45,10 @@ public class EmailListServlet extends HttpServlet {
                 session.removeAttribute(FLASH_KEY);
                 request.setAttribute("user", registration.user());
                 request.setAttribute("mailStatus", registration.status().name());
+                if (registration.delivery() != null) {
+                    request.setAttribute("mailProvider", registration.delivery().provider());
+                    request.setAttribute("fallbackReason", registration.delivery().fallbackReason().name());
+                }
                 response.setHeader("Cache-Control", "no-store");
                 request.getRequestDispatcher("/WEB-INF/views/thanks.jsp").forward(request, response);
             } else {
@@ -103,7 +104,7 @@ public class EmailListServlet extends HttpServlet {
 
     private void showForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("mailConfigured", mailConfigured);
+        request.setAttribute("mailPolicy", mailPolicy);
         request.getRequestDispatcher("/WEB-INF/views/email-list.jsp").forward(request, response);
     }
 }

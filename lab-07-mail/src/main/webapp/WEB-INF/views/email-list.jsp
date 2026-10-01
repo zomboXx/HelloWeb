@@ -14,9 +14,7 @@
     <h1>Join our email list</h1>
     <p>To join our email list, enter your name and email address below.</p>
 
-    <c:if test="${not mailConfigured}">
-        <p class="note">SMTP is not configured. Registration works, but no welcome email will be sent.</p>
-    </c:if>
+    <p class="note" role="status"><c:out value="${mailPolicy}" /></p>
 
     <c:if test="${not empty error}">
         <p class="error" role="alert"><c:out value="${error}" /></p>

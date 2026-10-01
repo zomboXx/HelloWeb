@@ -2,6 +2,8 @@ package com.example.email.service;
 
 import com.example.email.data.UserRepository;
 import com.example.email.mail.WelcomeMailSender;
+import com.example.email.mail.MailDelivery;
+import com.example.email.mail.MailDeliveryUncertainException;
 import com.example.email.model.User;
 import jakarta.mail.MessagingException;
 
@@ -24,18 +26,20 @@ public class EmailListService {
         if (!users.insertIfAbsent(user)) {
             return new RegistrationResult(user, DUPLICATE);
         }
-        // Commit the registration before sending mail. SMTP is not part of a JPA transaction.
+        // Commit first: neither SMTP nor HTTPS sending is part of a JPA transaction.
         if (!mail.isConfigured()) {
             return new RegistrationResult(user, NOT_CONFIGURED);
         }
         try {
-            mail.sendWelcome(user);
-            return new RegistrationResult(user, ACCEPTED_BY_SMTP);
+            MailDelivery delivery = mail.sendWelcome(user);
+            return new RegistrationResult(user,
+                    delivery.transport() == MailDelivery.Transport.SMTP ? ACCEPTED_BY_SMTP : ACCEPTED_BY_API,
+                    delivery);
         } catch (MessagingException e) {
             // Do not log credentials, the recipient, or the complete message body.
             LOGGER.log(Level.WARNING, "Welcome email failed ({0}); registration remains saved.",
                     e.getClass().getSimpleName());
-            return new RegistrationResult(user, FAILED);
+            return new RegistrationResult(user, e instanceof MailDeliveryUncertainException ? UNCONFIRMED : FAILED);
         }
     }
 }
