@@ -13,6 +13,7 @@ Repository này tổng hợp các bài thực hành môn Lập trình Web. Mỗi
 | 5 | JDBC, MVC và HikariCP (SQL Gateway + Email List) | [lab-05-jdbc](./lab-05-jdbc) | SQL Gateway chỉ chạy trên localhost |
 | 6 | Email List với JPA, Hibernate và HikariCP | [lab-06-jpa](./lab-06-jpa) | Chạy local; chưa triển khai |
 | 7 | Email List: Jakarta Mail/SMTP, thêm fallback HTTPS API | [lab-07-mail](./lab-07-mail) | [Mở website](https://helloweb-4.onrender.com/); cần cấu hình dịch vụ gửi thư và redeploy code mới |
+| 8 | Giỏ hàng CD và thanh toán VNPay Sandbox | [lab-08-vnpay](./lab-08-vnpay) | Chưa deploy; cần sandbox credentials |
 
 ## Build từng bài
 
@@ -33,6 +34,7 @@ mvn -f .\lab-04-album-download\pom.xml clean package
 mvn -f .\lab-05-jdbc\pom.xml clean package
 mvn -f .\lab-06-jpa\pom.xml clean package
 mvn -f .\lab-07-mail\pom.xml clean verify
+mvn -f .\lab-08-vnpay\pom.xml clean verify
 ```
 
 File WAR sau khi build nằm trong thư mục `target` của từng bài.
