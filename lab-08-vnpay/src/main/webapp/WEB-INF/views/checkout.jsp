@@ -21,9 +21,9 @@
                 <h2>Đơn hàng của bạn</h2>
                 <c:forEach var="item" items="${cart.items}">
                     <p class="summary-row"><span>${item.quantity} × <c:out value="${item.product.description}" /></span>
-                        <strong><fmt:formatNumber value="${item.amountVnd}" maxFractionDigits="0" /> ₫</strong></p>
+                        <strong><fmt:formatNumber value="${item.amountVnd}" pattern="#,##0" /> ₫</strong></p>
                 </c:forEach>
-                <p class="total">Cần thanh toán <strong><fmt:formatNumber value="${cart.totalVnd}" maxFractionDigits="0" /> ₫</strong></p>
+                <p class="total">Cần thanh toán <strong><fmt:formatNumber value="${cart.totalVnd}" pattern="#,##0" /> ₫</strong></p>
             </section>
             <p class="notice">Bạn sẽ được chuyển tới cổng VNPay Sandbox. Không nhập thông tin thẻ thật.</p>
             <c:url var="postUrl" value="/cart" />

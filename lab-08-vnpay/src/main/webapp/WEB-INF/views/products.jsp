@@ -26,7 +26,7 @@
             <c:forEach var="product" items="${products}">
                 <tr>
                     <td><c:out value="${product.description}" /></td>
-                    <td class="amount"><fmt:formatNumber value="${product.priceVnd}" maxFractionDigits="0" /> ₫</td>
+                    <td class="amount"><fmt:formatNumber value="${product.priceVnd}" pattern="#,##0" /> ₫</td>
                     <td>
                         <c:url var="postUrl" value="/cart" />
                         <form method="post" action="${postUrl}">

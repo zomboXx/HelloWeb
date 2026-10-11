@@ -20,7 +20,7 @@
             <c:otherwise><h2>Đang chờ xác nhận</h2><p>VNPay chưa gửi IPN xác nhận tới máy chủ. Vui lòng kiểm tra lại sau ít phút.</p></c:otherwise>
         </c:choose>
         <p>Mã đơn: <code><c:out value="${order.reference}" /></code></p>
-        <p>Số tiền: <strong><fmt:formatNumber value="${order.amountVnd}" maxFractionDigits="0" /> ₫</strong></p>
+        <p>Số tiền: <strong><fmt:formatNumber value="${order.amountVnd}" pattern="#,##0" /> ₫</strong></p>
         <c:if test="${not empty order.transactionNo}"><p>Mã giao dịch VNPay: <c:out value="${order.transactionNo}" /></p></c:if>
     </section>
     <nav class="actions">

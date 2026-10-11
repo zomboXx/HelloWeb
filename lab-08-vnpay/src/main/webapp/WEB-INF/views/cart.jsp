@@ -23,7 +23,7 @@
                 <c:forEach var="item" items="${cart.items}">
                     <tr>
                         <td><c:out value="${item.product.description}" /></td>
-                        <td class="amount"><fmt:formatNumber value="${item.product.priceVnd}" maxFractionDigits="0" /> ₫</td>
+                        <td class="amount"><fmt:formatNumber value="${item.product.priceVnd}" pattern="#,##0" /> ₫</td>
                         <td>
                             <c:url var="postUrl" value="/cart" />
                             <form class="inline-form" method="post" action="${postUrl}">
@@ -33,7 +33,7 @@
                                 <button type="submit" class="button-outline">Cập nhật</button>
                             </form>
                         </td>
-                        <td class="amount"><fmt:formatNumber value="${item.amountVnd}" maxFractionDigits="0" /> ₫</td>
+                        <td class="amount"><fmt:formatNumber value="${item.amountVnd}" pattern="#,##0" /> ₫</td>
                         <td>
                             <form method="post" action="${postUrl}">
                                 <input type="hidden" name="action" value="remove">
@@ -45,7 +45,7 @@
                 </c:forEach>
                 </tbody>
             </table></div>
-            <p class="total">Tổng cộng <strong><fmt:formatNumber value="${cart.totalVnd}" maxFractionDigits="0" /> ₫</strong></p>
+            <p class="total">Tổng cộng <strong><fmt:formatNumber value="${cart.totalVnd}" pattern="#,##0" /> ₫</strong></p>
         </c:otherwise>
     </c:choose>
     <nav class="actions">
