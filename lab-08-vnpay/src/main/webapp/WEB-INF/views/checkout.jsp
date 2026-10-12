@@ -7,25 +7,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Checkout · VNPay Sandbox</title>
+    <title>Thanh toán · Murach Music Store</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 <main class="shell narrow">
-    <header class="site-header"><div><span class="eyebrow">Murach Music Store</span><h1>Thanh toán</h1></div></header>
+    <header class="site-header"><a class="brand" href="${pageContext.request.contextPath}/cart"><span class="brand-mark" aria-hidden="true">◉</span><span>Murach <strong>Music</strong></span></a><span class="eyebrow">VNPay Sandbox</span></header>
+    <div class="page-heading"><span class="eyebrow">Almost there</span><h1>Xác nhận đơn hàng</h1><p>Kiểm tra lần cuối trước khi chuyển sang cổng thanh toán.</p></div>
     <c:if test="${not empty errorMessage}"><p class="error"><c:out value="${errorMessage}" /></p></c:if>
     <c:choose>
-        <c:when test="${empty cart.items}"><p class="empty">Giỏ hàng trống. Hãy chọn CD trước.</p></c:when>
+        <c:when test="${empty cart.items}"><section class="panel"><p class="empty">Giỏ hàng trống. Hãy chọn CD trước.</p></section></c:when>
         <c:otherwise>
             <section class="summary">
                 <h2>Đơn hàng của bạn</h2>
                 <c:forEach var="item" items="${cart.items}">
-                    <p class="summary-row"><span>${item.quantity} × <c:out value="${item.product.description}" /></span>
-                        <strong><fmt:formatNumber value="${item.amountVnd}" pattern="#,##0" /> ₫</strong></p>
+                    <div class="summary-row">
+                        <span class="summary-item"><img src="${pageContext.request.contextPath}${item.product.coverPath}" alt="" width="57" height="57">
+                            <span><strong><c:out value="${item.product.title}" /></strong><small>${item.quantity} × <c:out value="${item.product.artist}" /></small></span></span>
+                        <strong class="amount"><fmt:formatNumber value="${item.amountVnd}" pattern="#,##0" /> ₫</strong>
+                    </div>
                 </c:forEach>
                 <p class="total">Cần thanh toán <strong><fmt:formatNumber value="${cart.totalVnd}" pattern="#,##0" /> ₫</strong></p>
             </section>
-            <p class="notice">Bạn sẽ được chuyển tới cổng VNPay Sandbox. Không nhập thông tin thẻ thật.</p>
+            <p class="notice">Bạn sẽ được chuyển tới VNPay Sandbox. Chỉ dùng thông tin thẻ thử nghiệm, không nhập thẻ thật.</p>
             <c:url var="postUrl" value="/cart" />
             <form method="post" action="${postUrl}">
                 <input type="hidden" name="action" value="pay">

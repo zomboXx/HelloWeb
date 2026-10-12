@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="The first CD - bìa minh họa">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#ffb96f"/><stop offset="1" stop-color="#d96a53"/></linearGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1" fill="#fff0d4" opacity=".4"/></pattern>
+  </defs>
+  <rect width="480" height="480" fill="url(#bg)"/><rect width="480" height="480" fill="url(#dots)"/>
+  <circle cx="236" cy="229" r="137" fill="#ffe7aa"/>
+  <circle cx="236" cy="229" r="110" fill="#f49464"/>
+  <circle cx="236" cy="229" r="78" fill="#ffcf86"/>
+  <circle cx="236" cy="229" r="45" fill="#a54c50"/>
+  <circle cx="236" cy="229" r="9" fill="#ffe7aa"/>
+  <path d="M-22 337c64-55 135-55 205 0s141 55 211 0 141-55 211 0M-22 361c64-55 135-55 205 0s141 55 211 0 141-55 211 0M-22 385c64-55 135-55 205 0s141 55 211 0 141-55 211 0" fill="none" stroke="#8e4050" stroke-width="9" opacity=".85"/>
+  <text x="27" y="62" fill="#6f3040" font-size="32" font-weight="900" font-family="Arial,sans-serif" letter-spacing="1">PADDLEFOOT</text>
+  <text x="29" y="444" fill="#fff4db" font-size="24" font-weight="800" font-family="Arial,sans-serif" letter-spacing="4">THE FIRST CD</text>
+</svg>

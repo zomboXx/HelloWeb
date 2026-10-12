@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="The second CD - bìa minh họa">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#46356e"/><stop offset="1" stop-color="#95749f"/></linearGradient>
+    <linearGradient id="disc" x2="0" y2="1"><stop stop-color="#ffd7ab"/><stop offset="1" stop-color="#e89f9a"/></linearGradient>
+  </defs>
+  <rect width="480" height="480" fill="url(#bg)"/>
+  <path d="M0 356 480 120M0 404 480 168M0 452 480 216M0 500 480 264" stroke="#c9afc7" stroke-width="3" opacity=".35"/>
+  <rect x="95" y="94" width="290" height="290" rx="24" fill="#2c2450" transform="rotate(-12 240 240)"/>
+  <rect x="105" y="104" width="270" height="270" rx="19" fill="#614e83" stroke="#eac4bd" stroke-width="4" transform="rotate(-12 240 240)"/>
+  <circle cx="240" cy="240" r="111" fill="url(#disc)"/>
+  <circle cx="240" cy="240" r="78" fill="none" stroke="#fff0da" stroke-width="2" opacity=".8"/>
+  <circle cx="240" cy="240" r="50" fill="#5c437b"/>
+  <circle cx="240" cy="240" r="9" fill="#f4d8ce"/>
+  <path d="m45 239 37-9m321 12 34-7M237 39v39m0 325v38" stroke="#f8d7bb" stroke-width="5" stroke-linecap="round"/>
+  <text x="27" y="62" fill="#f8dfd2" font-size="31" font-weight="900" font-family="Arial,sans-serif" letter-spacing="1">PADDLEFOOT</text>
+  <text x="27" y="448" fill="#f8dfd2" font-size="23" font-weight="800" font-family="Arial,sans-serif" letter-spacing="3">THE SECOND CD</text>
+</svg>

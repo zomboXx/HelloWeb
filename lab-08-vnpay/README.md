@@ -2,6 +2,8 @@
 
 Ứng dụng Java 17 / Servlet / JSP độc lập. Luồng: chọn CD → giỏ hàng → tạo đơn hàng bằng **giá VND do server tính** → chuyển sang VNPay Sandbox → IPN xác nhận trạng thái → Return URL hiển thị kết quả.
 
+Giao diện dùng bốn ảnh bìa **minh họa tự tạo** (không phải artwork chính thức của album), lưu tại `src/main/webapp/images/albums`. Popup cảm ơn chỉ xuất hiện khi trạng thái đơn hàng là `PAID` sau khi máy chủ xử lý IPN hợp lệ; chỉ quay về Return URL chưa đủ để hiện thông báo thành công.
+
 > Chỉ dùng sandbox. Không nhập thẻ thật. Đơn hàng hiện lưu **trong RAM** để phục vụ bài thực hành; khi Render khởi động lại, trạng thái sẽ mất. Muốn dùng cho giao dịch thật phải thay `OrderStore` bằng cơ sở dữ liệu bền vững và xử lý đối soát.
 
 ## Chạy local

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Genuine Wood Grained Finish - bìa minh họa">
+  <defs>
+    <linearGradient id="wood" x2="1" y2="1"><stop stop-color="#9d694d"/><stop offset="1" stop-color="#593c39"/></linearGradient>
+    <clipPath id="frame"><rect x="30" y="95" width="420" height="285" rx="9"/></clipPath>
+  </defs>
+  <rect width="480" height="480" fill="#1a403d"/>
+  <rect x="30" y="95" width="420" height="285" rx="9" fill="url(#wood)"/>
+  <g clip-path="url(#frame)" fill="none" stroke="#d2a783" opacity=".65">
+    <path d="M-10 136c100 43 207-35 313 9s170 8 224-20M-20 165c108 55 180-35 308 15s168-1 215-17M-20 197c121 41 192-29 313 14s171-6 216-13M-20 236c92 40 205-40 313 1s167-6 214-28M-20 283c120 51 190-29 302 8s158-3 211-27M-20 325c91 46 192-38 311 5s169-9 213-21M-20 362c119 36 193-27 295 11s166-8 217-28" stroke-width="9"/>
+    <path d="M-10 127c100 43 207-35 313 9s170 8 224-20M-20 217c121 41 192-29 313 14s171-6 216-13M-20 345c91 46 192-38 311 5s169-9 213-21" stroke="#36262a" stroke-width="3"/>
+  </g>
+  <circle cx="246" cy="235" r="99" fill="#213b3a" opacity=".92"/>
+  <circle cx="246" cy="235" r="73" fill="none" stroke="#d8b38f" stroke-width="2"/>
+  <circle cx="246" cy="235" r="39" fill="none" stroke="#d8b38f" stroke-width="2"/>
+  <circle cx="246" cy="235" r="8" fill="#d8b38f"/>
+  <text x="29" y="62" fill="#e9d6b9" font-size="31" font-weight="900" font-family="Arial,sans-serif" letter-spacing="2">JOE RUT</text>
+  <text x="29" y="425" fill="#e9d6b9" font-size="20" font-weight="800" font-family="Arial,sans-serif" letter-spacing="2">GENUINE WOOD</text>
+  <text x="29" y="450" fill="#e9d6b9" font-size="17" font-family="Arial,sans-serif" letter-spacing="3">GRAINED FINISH</text>
+</svg>
