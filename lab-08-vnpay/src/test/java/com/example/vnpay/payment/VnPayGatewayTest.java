@@ -1,5 +1,7 @@
 package com.example.vnpay.payment;
 
+import com.example.vnpay.model.Cart;
+import com.example.vnpay.model.Catalog;
 import org.junit.jupiter.api.Test;
 
 import javax.crypto.Mac;
@@ -66,6 +68,20 @@ class VnPayGatewayTest {
         assertFalse(order.finish(Order.Status.FAILED, "txn-2"));
         assertEquals(Order.Status.PAID, order.getStatus());
         assertEquals("txn-1", order.getTransactionNo());
+    }
+
+    @Test
+    void orderKeepsAlbumSnapshotWhenCartChanges() {
+        Cart cart = new Cart();
+        cart.add(Catalog.find("pf01"));
+        Order order = OrderStore.instance().create(cart);
+        cart.update("pf01", 3);
+
+        assertEquals(1, order.getItems().size());
+        assertEquals("The first CD", order.getItems().get(0).getProduct().getTitle());
+        assertEquals(1, order.getItems().get(0).getQuantity());
+        assertEquals(130_000, order.getAmountVnd());
+        assertEquals(390_000, cart.getTotalVnd());
     }
 
     private static Map<String, String[]> signedCallback(String ref, String amount,

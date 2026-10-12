@@ -19,7 +19,7 @@ public final class OrderServlet extends HttpServlet {
         response.setHeader("Cache-Control", "no-store");
         HttpSession session = request.getSession(false);
         String ref = request.getParameter("ref");
-        if (session == null || ref == null || !ref.equals(session.getAttribute("pendingOrderRef"))) {
+        if (!OrderSession.owns(session, ref)) {
             response.sendError(404);
             return;
         }
@@ -28,10 +28,12 @@ public final class OrderServlet extends HttpServlet {
             response.sendError(404);
             return;
         }
-        if (order.getStatus() == Order.Status.PAID) {
-            session.removeAttribute("cart");
-            session.removeAttribute("pendingOrderRef");
+        if ("status".equals(request.getParameter("format"))) {
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write("{\"status\":\"" + order.getStatus().name() + "\"}");
+            return;
         }
+        OrderSession.clearPaidCartIfCurrent(session, order);
         request.setAttribute("order", order);
         request.getRequestDispatcher("/WEB-INF/views/result.jsp").forward(request, response);
     }

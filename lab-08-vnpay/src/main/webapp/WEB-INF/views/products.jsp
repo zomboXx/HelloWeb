@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <fmt:setLocale value="vi_VN" />
@@ -18,7 +18,11 @@
             <span class="brand-mark" aria-hidden="true">◉</span><span>Murach <strong>Music</strong></span>
         </a>
         <c:url var="cartUrl" value="/cart"><c:param name="action" value="view" /></c:url>
-        <a class="button button-outline" href="${cartUrl}">Giỏ hàng <span aria-hidden="true">↗</span></a>
+        <c:url var="ordersUrl" value="/orders" />
+        <nav class="header-actions" aria-label="Tài khoản mua hàng">
+            <a class="header-link" href="${ordersUrl}">Đơn hàng của tôi</a>
+            <a class="button button-outline" href="${cartUrl}">Giỏ hàng <span aria-hidden="true">↗</span></a>
+        </nav>
     </header>
 
     <section class="hero" aria-labelledby="page-title">

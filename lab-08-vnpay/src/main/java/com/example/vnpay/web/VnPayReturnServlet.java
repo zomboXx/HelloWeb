@@ -28,11 +28,7 @@ public final class VnPayReturnServlet extends HttpServlet {
             return;
         }
         HttpSession session = request.getSession(false);
-        if (order.getStatus() == Order.Status.PAID && session != null
-                && ref.equals(session.getAttribute("pendingOrderRef"))) {
-            session.removeAttribute("cart");
-            session.removeAttribute("pendingOrderRef");
-        }
+        OrderSession.clearPaidCartIfCurrent(session, order);
         request.setAttribute("order", order);
         request.setAttribute("gatewaySuccess", "00".equals(request.getParameter("vnp_ResponseCode"))
                 && "00".equals(request.getParameter("vnp_TransactionStatus")));

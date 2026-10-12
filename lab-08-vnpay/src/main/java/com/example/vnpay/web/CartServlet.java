@@ -85,8 +85,8 @@ public final class CartServlet extends HttpServlet {
             return;
         }
         VnPayGateway gateway = VnPayGateway.fromEnvironment();
-        Order order = OrderStore.instance().create(cart.getTotalVnd());
-        request.getSession().setAttribute("pendingOrderRef", order.getReference());
+        Order order = OrderStore.instance().create(cart);
+        OrderSession.remember(request.getSession(), order.getReference());
         String url = gateway.paymentUrl(order, request.getRemoteAddr(), Instant.now());
         response.sendRedirect(url);
     }

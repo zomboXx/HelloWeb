@@ -6,6 +6,8 @@ Giao diện dùng bốn ảnh bìa **minh họa tự tạo** (không phải artw
 
 > Chỉ dùng sandbox. Không nhập thẻ thật. Đơn hàng hiện lưu **trong RAM** để phục vụ bài thực hành; khi Render khởi động lại, trạng thái sẽ mất. Muốn dùng cho giao dịch thật phải thay `OrderStore` bằng cơ sở dữ liệu bền vững và xử lý đối soát.
 
+Trang `/orders` cho người dùng cùng phiên trình duyệt xem các đơn đã tạo, album, số lượng và trạng thái. Đây **không phải trang admin** hay lịch sử bền vững: muốn quản lý mọi giao dịch phải dùng database cùng xác thực/phân quyền. Giỏ hàng chỉ được xóa sau khi đơn có trạng thái `PAID` do IPN xác nhận.
+
 ## Chạy local
 
 ```powershell
@@ -23,6 +25,8 @@ Các biến môi trường cần điền **trên máy chủ**, không đưa vào
 | `VNPAY_RETURN_URL` | URL tuyệt đối, ví dụ `https://<ten-service>.onrender.com/vnpay/return` |
 
 Đăng ký sandbox tại [cổng dành cho nhà phát triển VNPay](https://sandbox.vnpayment.vn/devreg/). Trên môi trường VNPay, thiết lập **IPN URL** là `https://<ten-service>.onrender.com/vnpay/ipn` (khác Return URL). Không cấu hình đủ 3 biến thì vẫn xem được giỏ hàng nhưng nút thanh toán bị khóa.
+
+Nếu trang kết quả cứ ở `PENDING`, hãy kiểm tra VNPay đã được khai báo IPN URL trên chưa. Endpoint có thể truy cập công khai bằng HTTPS, nhưng chỉ xem trang Return URL không khiến đơn chuyển sang `PAID`. Trang kết quả tự kiểm tra trạng thái khoảng một phút; Render Logs ghi `VNPay IPN response code=...` khi có yêu cầu IPN. Không ghi Hash Secret vào log hoặc repository.
 
 ## Deploy trên Render
 

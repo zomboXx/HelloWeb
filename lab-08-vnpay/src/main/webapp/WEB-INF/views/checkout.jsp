@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <fmt:setLocale value="vi_VN" />
@@ -12,7 +12,7 @@
 </head>
 <body>
 <main class="shell narrow">
-    <header class="site-header"><a class="brand" href="${pageContext.request.contextPath}/cart"><span class="brand-mark" aria-hidden="true">◉</span><span>Murach <strong>Music</strong></span></a><span class="eyebrow">VNPay Sandbox</span></header>
+    <header class="site-header"><a class="brand" href="${pageContext.request.contextPath}/cart"><span class="brand-mark" aria-hidden="true">◉</span><span>Murach <strong>Music</strong></span></a><c:url var="ordersUrl" value="/orders" /><a class="header-link" href="${ordersUrl}">Đơn hàng của tôi</a></header>
     <div class="page-heading"><span class="eyebrow">Almost there</span><h1>Xác nhận đơn hàng</h1><p>Kiểm tra lần cuối trước khi chuyển sang cổng thanh toán.</p></div>
     <c:if test="${not empty errorMessage}"><p class="error"><c:out value="${errorMessage}" /></p></c:if>
     <c:choose>

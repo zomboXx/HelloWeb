@@ -9,10 +9,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /** Server-to-server callback. This is the only endpoint that finalizes an order. */
 @WebServlet("/vnpay/ipn")
 public final class VnPayIpnServlet extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(VnPayIpnServlet.class.getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
@@ -47,6 +50,7 @@ public final class VnPayIpnServlet extends HttpServlet {
 
     private static void reply(HttpServletResponse response, String code, String message)
             throws IOException {
+        LOGGER.info("VNPay IPN response code=" + code);
         response.getWriter().write("{\"RspCode\":\"" + code + "\",\"Message\":\"" + message + "\"}");
     }
 }
